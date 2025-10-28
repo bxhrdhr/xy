@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>曦月TV - 下载中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 100%);
+            color: #8b475d;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #d87093;
+            margin-bottom: 20px;
+        }
+        
+        .date-info {
+            background-color: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #c71585;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .image-section {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .feature-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(219, 112, 147, 0.3);
+            transition: transform 0.5s ease;
+            cursor: zoom-in;
+        }
+        
+        .feature-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(219, 112, 147, 0.2);
+        }
+        
+        .app-title {
+            font-size: 2rem;
+            color: #ff1493;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffb6c1;
+            padding-bottom: 10px;
+        }
+        
+        .app-description {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #8b475d;
+        }
+        
+        .features {
+            margin: 20px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #ffb6c1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(219, 112, 147, 0.2);
+        }
+        
+        .download-title {
+            font-size: 1.5rem;
+            color: #ff1493;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+        
+        .download-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #d87093;
+        }
+        
+        .hint-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #c71585;
+            font-style: italic;
+        }
+        
+        .sakura {
+            position: absolute;
+            background-color: #ffc0cb;
+            border-radius: 50% 0 50% 0;
+            opacity: 0.7;
+            z-index: -1;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #d87093;
+            font-size: 0.9rem;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            
+        }
+
+        .drawer-title {
+            font-size: 1.5rem;
+            color: #ff1493;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8b475d;
+        }
+
+        .drawer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .drawer-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.9);
+        }
+
+        .drawer-text {
+            line-height: 1.6;
+            color: #8b475d;
+        }
+
+        .toggle-drawer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            z-index: 999;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+.copy-frame {
+    background: #fff0f5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.copy-title {
+    font-size: 1.1rem;
+    color: #ff1493;
+    margin-bottom: 8px;
+}
+
+.copy-text {
+    /* 长链接处理核心属性 */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    
+    /* 布局控制 */
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    
+    /* 样式美化 */
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    color: #8b475d;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(255, 105, 180, 0.3);
+}
+
+    </style>
+</head>
+<body>
+    <div id="sakura-container"></div>
+
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h3 class="drawer-title">打赏作者</h3>
+            <button class="close-btn" id="closeDrawer">×</button>
+        </div>
+        <div class="drawer-content">
+            <img src="2.jpg" alt="动漫资讯图" class="drawer-image">
+            <p class="drawer-text">添加视频线路教程:打开软件后，打开设置，然后打开配置地址，然后有个弹窗弹出来，把你复制的视频源粘贴上去，点击确认，返回就配置完成了。</p>
+            
+            <div class="copy-frame">
+                <div class="copy-title">1号线路:小苹果影视</div>
+                <div class="copy-text" id="copyText1">http://box.9box.xyz/</div>
+                <button class="copy-btn" data-clipboard-target="#copyText1">复制视频源</button>
+            </div>
+
+            <div class="copy-frame">
+                <div class="copy-title">2号线路：七星影视仓</div>
+                <div class="copy-text" id="copyText2">https://qixing.myhkw.com/%E8%87%AA%E7%94%A8%E6%B5%8B%E8%AF%95.txt</div>
+                <button class="copy-btn" data-clipboard-target="#copyText2">复制视频源</button>
+            </div>
+
+            <div class="copy-frame">
+                <div class="copy-title">3号线路：七月影视</div>
+                <div class="copy-text" id="copyText3">http://tvvip.kevip.icu/wwwbaiducomm/1016/wwwbaiducom.json</div>
+                <button class="copy-btn" data-clipboard-target="#copyText3">复制文案</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toggle-drawer" id="toggleDrawer">☰</div>
+
+    <div class="modal" id="imageModal">
+        <span class="close-modal" id="closeModal">×</span>
+        <div class="modal-content">
+            <img src="" alt="放大的图片" class="modal-image" id="modalImage">
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">曦月TV</div>
+            <div class="subtitle">沉浸式动漫体验，开启二次元之旅</div>
+            <div class="date-info">2025/10/17 13:20</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="image-section">
+                <img src="1.jpg" onerror="this.src='https://picsum.photos/600/400?random=1'" alt="曦月TV应用界面" class="feature-image" id="mainImage">
+            </div>
+            
+            <div class="info-section">
+                <h2 class="app-title">应用介绍</h2>
+                <p class="app-description">
+                    曦月TV是一款专为动漫爱好者打造的高品质应用，提供海量正版动漫资源，包括热门新番、经典作品、国漫精品等。支持2K超清画质，带来沉浸式观看体验。
+                </p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <span>海量正版动漫资源，每日更新</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <span>支持2K超清画质，视觉盛宴</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <span>个性化推荐，发现你的专属动漫</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <span>离线下载，随时随地观看</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <span>社区互动，与同好交流心得</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h3 class="download-title">立即下载曦月TV</h3>
+            <a href="https://www.123865.com/s/ynz5Vv-DyY3d" class="download-btn">曦月 下载</a>
+            <a href="https://www.123865.com/s/ynz5Vv-DyY3d" class="download-btn">曦月TV下载</a>
+            <p class="download-info">版本 2.5.1 | 大小 158MB | 支持 Android 5.0+ / iOS 12.0+</p>
+            <p class="hint-text">💡 需要视频源？点击页面右上角的 ☰ 按钮获取！</p>
+        </div>
+        
+        <footer>
+            <p>© 2025 曦月TV 版权所有 | 服务条款 | 隐私政策</p>
+        </footer>
+    </div>
+
+    <script>
+        // 创建樱花飘落效果
+        function createSakura() {
+            const container = document.getElementById('sakura-container');
+            const sakuraCount = 15;
+            
+            for (let i = 0; i < sakuraCount; i++) {
+                const sakura = document.createElement('div');
+                sakura.classList.add('sakura');
+                
+                const size = Math.random() * 15 + 5;
+                sakura.style.width = `${size}px`;
+                sakura.style.height = `${size}px`;
+                sakura.style.left = `${Math.random() * 100}vw`;
+                sakura.style.opacity = Math.random() * 0.5 + 0.3;
+                const duration = Math.random() * 10 + 5;
+                sakura.style.animationDuration = `${duration}s`;
+                sakura.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(sakura);
+            }
+        }
+        
+        // 初始化Clipboard.js
+        function initClipboard() {
+            var clipboard = new ClipboardJS('.copy-btn');
+
+            clipboard.on('success', function(e) {
+                alert('文案已成功复制到剪贴板！');
+                e.clearSelection();
+            });
+
+            clipboard.on('error', function(e) {
+                fallbackCopyText(document.querySelector(e.trigger.dataset.clipboardTarget).textContent);
+            });
+        }
+
+        // 复制失败时的降级方案
+        function fallbackCopyText(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = 0;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    alert('文案已成功复制到剪贴板！');
+                } else {
+                    throw new Error('execCommand failed');
+                }
+            } catch (err) {
+                console.error('降级复制也失败:', err);
+                prompt('请手动复制以下文案：', text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // 页面加载完成后执行初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createSakura();
+            initClipboard();
+        });
+
+        // 抽屉式弹窗交互
+        const drawer = document.getElementById('drawer');
+        const toggleDrawer = document.getElementById('toggleDrawer');
+        const closeDrawer = document.getElementById('closeDrawer');
+
+        toggleDrawer.addEventListener('click', () => {
+            drawer.classList.toggle('open');
+        });
+
+        closeDrawer.addEventListener('click', () => {
+            drawer.classList.remove('open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!drawer.contains(e.target) && !toggleDrawer.contains(e.target) && drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+            }
+        });
+
+        // 图片放大功能
+        const mainImage = document.getElementById('mainImage');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+
+        mainImage.addEventListener('click', () => {
+            modalImage.src = mainImage.src;
+            modal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
