@@ -4,27 +4,6 @@
   "logo": "https://13935.kstore.space/b/logo.gif",
   "sites": [
     {
-      "key": "腾讯视频",
-      "name": "腾讯🥇2K",
-      "type": 3,
-      "api": "./lib/drpy2.min.js",
-      "ext": "./lib/腾讯视频.js"
-    },
-    {
-      "key": "芒果视频",
-      "name": "芒果🥇2K",
-      "type": 3,
-      "api": "./lib/drpy2.min.js",
-      "ext": "./lib/芒果视频.js"
-    },
-    {
-      "key": "爱奇艺",
-      "name": "奇艺🥇2K",
-      "type": 3,
-      "api": "./lib/drpy2.min.js",
-      "ext": "./lib/爱奇艺.js"
-    },
-    {
       "key": "瓜子",
       "name": "🍓曦月┃2K①",
       "type": 3,
@@ -228,6 +207,28 @@
       "type": 3,
       "api": "./lib/drpy2.min.js",
       "ext": "http://210.16.160.81:1122/lib/优酷视频.js"
+    },
+    
+    {
+      "key": "腾讯视频",
+      "name": "腾讯🥇2K",
+      "type": 3,
+      "api": "./lib/drpy2.min.js",
+      "ext": "./lib/腾讯视频.js"
+    },
+    {
+      "key": "芒果视频",
+      "name": "芒果🥇2K",
+      "type": 3,
+      "api": "./lib/drpy2.min.js",
+      "ext": "./lib/芒果视频.js"
+    },
+    {
+      "key": "爱奇艺",
+      "name": "奇艺🥇2K",
+      "type": 3,
+      "api": "./lib/drpy2.min.js",
+      "ext": "./lib/爱奇艺.js"
     },
     {
       "key": "push_agent",
